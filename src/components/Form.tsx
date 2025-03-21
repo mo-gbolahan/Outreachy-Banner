@@ -18,8 +18,9 @@ type FormProps = {
 };
 
 const Form: React.FC<FormProps> = ({ onSubmit, register, errors }) => {
+  const { handleSubmit } = useForm<FormField>();
   return (
-    <form onSubmit={onSubmit} className="form">
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
       <div className="form-group">
         <input
           {...register("background", {
