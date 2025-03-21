@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,21 +11,33 @@ type FormField = {
 };
 
 type FormProps = {
-  onSubmit: SubmitHandler<FormField>;
   register: any;
   errors: any;
+  setBannerText: React.Dispatch<React.SetStateAction<string>>;
+  setBannerBackground: React.Dispatch<React.SetStateAction<string>>;
+  setFontSize: React.Dispatch<React.SetStateAction<string>>;
+  setFontColor: React.Dispatch<React.SetStateAction<string>>;
+  setTextPosition: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Form: React.FC<FormProps> = ({ onSubmit, register, errors }) => {
-  const { handleSubmit } = useForm<FormField>();
+const Form: React.FC<FormProps> = ({
+  register,
+  errors,
+  setBannerText,
+  setBannerBackground,
+  setFontSize,
+  setFontColor,
+  setTextPosition,
+}) => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
+    <form className="form">
       <div className="form-group">
         <input
           {...register("background", {
             required: "Background is required",
           })}
           placeholder="Text that best describe your banner background"
+          onChange={(e) => setBannerBackground(e.target.value)}
         />
         <button type="submit" className="search-button">
           <FontAwesomeIcon icon={faSearch} />
@@ -41,6 +52,7 @@ const Form: React.FC<FormProps> = ({ onSubmit, register, errors }) => {
           required: "Banner Text is required",
         })}
         placeholder="Banner Text"
+        onChange={(e) => setBannerText(e.target.value)}
       />
       {errors.bannerText && (
         <span className="error-message">{errors.bannerText.message}</span>
@@ -49,6 +61,7 @@ const Form: React.FC<FormProps> = ({ onSubmit, register, errors }) => {
       <input
         {...register("fontSize", {})}
         placeholder="Font Size (e.g., 24px, 2rem)"
+        onChange={(e) => setFontSize(e.target.value)}
       />
       {errors.fontSize && (
         <span className="error-message">{errors.fontSize.message}</span>
@@ -57,12 +70,17 @@ const Form: React.FC<FormProps> = ({ onSubmit, register, errors }) => {
       <input
         {...register("fontColor", {})}
         placeholder="Font Color (e.g., #000000, blue)"
+        onChange={(e) => setFontColor(e.target.value)}
       />
       {errors.fontColor && (
         <span className="error-message">{errors.fontColor.message}</span>
       )}
 
-      <select {...register("textPosition", {})} defaultValue="center">
+      <select
+        {...register("textPosition", {})}
+        defaultValue="center"
+        onChange={(e) => setTextPosition(e.target.value)}
+      >
         <option value="flex-start">Top</option>
         <option value="center">Middle</option>
         <option value="flex-end">Bottom</option>

@@ -68,9 +68,13 @@ const App = () => {
         </button>
         {isFormVisible && (
           <Form
-            onSubmit={handleSubmit(onSubmit)}
             register={register}
             errors={errors}
+            setBannerText={setBannerText}
+            setBannerBackground={setBannerBackground}
+            setFontSize={setFontSize}
+            setFontColor={setFontColor}
+            setTextPosition={setTextPosition}
           />
         )}
       </div>
