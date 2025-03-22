@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,8 +14,8 @@ type FormField = {
 type FormProps = {
   register: any;
   errors: any;
+  handleSubmit: any;
   setBannerText: React.Dispatch<React.SetStateAction<string>>;
-  setBannerBackground: React.Dispatch<React.SetStateAction<string>>;
   setFontSize: React.Dispatch<React.SetStateAction<string>>;
   setFontColor: React.Dispatch<React.SetStateAction<string>>;
   setTextPosition: React.Dispatch<React.SetStateAction<string>>;
@@ -23,21 +24,20 @@ type FormProps = {
 const Form: React.FC<FormProps> = ({
   register,
   errors,
+  handleSubmit,
   setBannerText,
-  setBannerBackground,
   setFontSize,
   setFontColor,
   setTextPosition,
 }) => {
   return (
-    <form className="form">
+    <form onSubmit={handleSubmit} className="form">
       <div className="form-group">
         <input
           {...register("background", {
             required: "Background is required",
           })}
           placeholder="Text that best describe your banner background"
-          onChange={(e) => setBannerBackground(e.target.value)}
         />
         <button type="submit" className="search-button">
           <FontAwesomeIcon icon={faSearch} />

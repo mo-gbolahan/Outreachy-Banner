@@ -20,15 +20,18 @@ const Banner: React.FC<BannerProps> = ({
   return (
     <div
       className="banner"
+      data-testid="banner"
       style={{
         background: backgroundURL
           ? `url(${backgroundURL}) no-repeat center center/cover`
-          : bannerBackground,
+          : "#000000",
         justifyContent: textPosition.split(" ")[0],
         alignItems: textPosition.split(" ")[1] || "center",
       }}
     >
-      <h1 style={{ fontSize, color: fontColor }}>{bannerText}</h1>
+      <h1 data-testid="banner-text" style={{ fontSize, color: fontColor }}>
+        {bannerText}
+      </h1>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./App.scss"; // Import the App.scss
@@ -17,7 +17,7 @@ type FormField = {
 
 const App = () => {
   const [isFormVisible, setIsFormVisible] = useState(true);
-  const [bannerText, setBannerText] = useState("Banner Text. eg Volleyball");
+  const [bannerText, setBannerText] = useState("Banner Text e.g. Volleyball");
   const [bannerBackground, setBannerBackground] =
     useState<string>("volleyball");
   const [backgroundURL, setBackgroundURL] = useState<string>();
@@ -43,16 +43,12 @@ const App = () => {
   } = useForm<FormField>();
 
   const onSubmit: SubmitHandler<FormField> = (data) => {
-    setBannerText(data.bannerText);
     setBannerBackground(data.background);
-    setFontSize(data.fontSize);
-    setFontColor(data.fontColor);
-    setTextPosition(data.textPosition);
   };
-
+  const initialRender = useRef(true);
   useEffect(() => {
     if (state.photos.length) {
-      setBackgroundURL(state.photos[0].src.original);
+      // setBackgroundURL();
     }
   }, [state]);
 
@@ -70,8 +66,8 @@ const App = () => {
           <Form
             register={register}
             errors={errors}
+            handleSubmit={handleSubmit(onSubmit)}
             setBannerText={setBannerText}
-            setBannerBackground={setBannerBackground}
             setFontSize={setFontSize}
             setFontColor={setFontColor}
             setTextPosition={setTextPosition}
