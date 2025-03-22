@@ -77,6 +77,7 @@ const Form: React.FC<FormProps> = ({
       )}
 
       <select
+        data-testid="dropdown"
         {...register("textPosition", {})}
         defaultValue="center"
         onChange={(e) => setTextPosition(e.target.value)}
