@@ -57,15 +57,21 @@ const Form: React.FC<FormProps> = ({
       {errors.bannerText && (
         <span className="error-message">{errors.bannerText.message}</span>
       )}
-
-      <input
-        {...register("fontSize", {})}
-        placeholder="Font Size (e.g., 24px, 2rem)"
-        onChange={(e) => setFontSize(e.target.value)}
-      />
-      {errors.fontSize && (
-        <span className="error-message">{errors.fontSize.message}</span>
-      )}
+      <div className="font-size">
+        <label htmlFor="fontSize">Font Size:</label>
+        <input
+          {...register("fontSize", {})}
+          id="fontSize"
+          type="range"
+          min="10"
+          max="70"
+          step="1"
+          className="slider"
+          defaultValue="50"
+          onChange={(e) => setFontSize(`${e.target.value}px`)}
+        />
+        {/* <span className="error-message">{errors.fontSize.message}</span> */}
+      </div>
 
       <input
         {...register("fontColor", {})}

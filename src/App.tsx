@@ -62,6 +62,7 @@ const App = () => {
         <button onClick={toggleFormVisibility} className="toggle-button">
           <FontAwesomeIcon icon={isFormVisible ? faEyeSlash : faEye} />
         </button>
+        <div className="form-title">Customize Your Banner</div>
         {isFormVisible && (
           <Form
             register={register}
