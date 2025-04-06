@@ -35,7 +35,6 @@ const App = () => {
     error: any;
     setIsLoadingMore: (isLoading: boolean) => void;
   } = useBackgroundPicture(bannerBackground); // Use the useBackgroundPicture hook
-
   const {
     register,
     handleSubmit,
@@ -48,7 +47,14 @@ const App = () => {
   const initialRender = useRef(true);
   useEffect(() => {
     if (state.photos.length) {
-      // setBackgroundURL();
+      setBackgroundURL(state.photos[0].src.original);
+      if (error) {
+        setBannerText(
+          "Error: Unable to load the background picture. Please try again."
+        );
+        setFontColor("red");
+        setFontSize("2rem");
+      }
     }
   }, [state]);
 
